@@ -36,6 +36,10 @@
   ol.steps li { margin-bottom:10px; }
   ol.steps li b { color:var(--navy); }
   .contact p { margin-bottom:8px; }
+  .field { margin-bottom:14px; }
+  .field label { display:block; font-weight:700; color:var(--navy); margin-bottom:4px; }
+  .field input, .field select { width:100%; padding:10px 12px; border:1px solid #cbd5e1; border-radius:8px; font-size:1rem; font-family:inherit; }
+  form button { border:none; cursor:pointer; font-size:1rem; }
   footer { text-align:center; color:var(--muted); font-size:.9rem; padding:20px; }
   @media (max-width:600px){ .hero h1{font-size:1.6rem;} .hero p.tag{font-size:1.1rem;} }
 </style>
@@ -94,6 +98,20 @@
     </section>
 
     <section>
+      <h2>Reserve Your Founding Provider Spot</h2>
+      <p>Founding provider spots are reserved for early providers. Fill in the form below and it will open your email app to send the reservation to Info@Madaars.com. Provider registration itself opens inside the Madaar app at launch.</p>
+      <form id="reserve-form">
+        <div class="field"><label for="r-name">Full Name</label><input id="r-name" name="name" type="text" required></div>
+        <div class="field"><label for="r-phone">Phone</label><input id="r-phone" name="phone" type="tel" required></div>
+        <div class="field"><label for="r-email">Email</label><input id="r-email" name="email" type="email" required></div>
+        <div class="field"><label for="r-service">Service You Provide</label><select id="r-service" name="service"><option>Towing &amp; Recovery</option><option>Mobile Mechanic</option><option>Tire Service</option><option>Parts Store</option></select></div>
+        <div class="field"><label for="r-city">City</label><input id="r-city" name="city" type="text" required></div>
+        <div class="field"><label for="r-state">State</label><input id="r-state" name="state" type="text" required></div>
+        <button class="btn btn-call" type="submit">Reserve My Spot</button>
+      </form>
+    </section>
+
+    <section>
       <h2>The Madaar App</h2>
       <p>The Madaar app connects truck owners with nearby roadside assistance providers across the United States. Truck owners request help and providers accept jobs inside the app. Provider registration opens inside the app at launch &mdash; founding provider spots are being reserved now. Until then, reach us by email or phone below.</p>
     </section>
@@ -107,5 +125,14 @@
 
     <footer>&copy; 2026 Madaar LLC &middot; Hurst, Texas, USA &middot; Madaars.com</footer>
   </div>
+<script>
+document.getElementById('reserve-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var v = function(id){ return document.getElementById(id).value.trim(); };
+  var subject = 'Founding Provider Spot Reservation - ' + v('r-name');
+  var body = 'Name: ' + v('r-name') + '\nPhone: ' + v('r-phone') + '\nEmail: ' + v('r-email') + '\nService: ' + v('r-service') + '\nCity: ' + v('r-city') + ', ' + v('r-state') + '\n\nI would like to reserve a founding provider spot with Madaar LLC.';
+  window.location.href = 'mailto:Info@Madaars.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+});
+</script>
 </body>
 </html>
